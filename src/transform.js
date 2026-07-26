@@ -540,6 +540,7 @@ function buildPayload(input, options) {
     const future = [];
     const undated = [];
     const nowValue = current.getTime();
+    const maxPastAgeMs = 30 * 60 * 1000;
 
     for (const item of items) {
       const time = item[1];
@@ -558,7 +559,11 @@ function buildPayload(input, options) {
       }
     }
     future.sort((a, b) => a[1].getTime() - b[1].getTime());
-    return (mostRecentPast ? [mostRecentPast] : []).concat(future, undated);
+    const recentPast = mostRecentPast &&
+      nowValue - mostRecentPast[1].getTime() <= maxPastAgeMs
+      ? [mostRecentPast]
+      : [];
+    return recentPast.concat(future, undated);
   }
 }
 
