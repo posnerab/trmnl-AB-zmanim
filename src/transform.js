@@ -12,6 +12,7 @@ function run(input) {
 function buildPayload(input, options) {
   const TZID = "America/Chicago";
   const now = options && options.now ? new Date(options.now) : new Date();
+  // BEGIN GENERATED CBJ CALENDAR - shared/cbj_calendar/schedule.json
   const CBJ_MINCHA_SCHEDULE = {
     "2026-07-01": [
       "20:20"
@@ -224,6 +225,7 @@ function buildPayload(input, options) {
     "2026-08-21": "18:30",
     "2026-08-28": "19:15"
   };
+  // END GENERATED CBJ CALENDAR
 
   const PARASHA_MAP = {
     "Achrei Mot": "Acharei Mos",
@@ -362,13 +364,36 @@ function buildPayload(input, options) {
 
   function parseCbjMincha(dateString) {
     return (CBJ_MINCHA_SCHEDULE[dateString] || []).map((clock) =>
-      new Date(`${dateString}T${clock}:00-05:00`)
+      parseLocalClock(dateString, clock)
     );
   }
 
   function parseCbjCandleLighting(dateString) {
     const clock = CBJ_CANDLE_LIGHTING_SCHEDULE[dateString];
-    return clock ? new Date(`${dateString}T${clock}:00-05:00`) : null;
+    return clock ? parseLocalClock(dateString, clock) : null;
+  }
+
+  function parseLocalClock(dateString, clock) {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const [hour, minute] = clock.split(":").map(Number);
+    const utcGuess = new Date(Date.UTC(year, month - 1, day, hour, minute));
+    const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+      timeZone: TZID,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23"
+    }).formatToParts(utcGuess).map((part) => [part.type, part.value]));
+    const representedAsUtc = Date.UTC(
+      Number(parts.year),
+      Number(parts.month) - 1,
+      Number(parts.day),
+      Number(parts.hour),
+      Number(parts.minute)
+    );
+    return new Date(utcGuess.getTime() - (representedAsUtc - utcGuess.getTime()));
   }
 
   function cbjMinchaItems(items) {
