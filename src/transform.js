@@ -418,6 +418,20 @@ function buildPayload(input, options) {
       "2026-10-30": "17:28"
   };
 
+  const CBJ_CALENDAR_IMPORT_STATE = Object.freeze({
+      "canonical_processed_pdf_url": "https://bethjehudah.org/wp-content/uploads/2026/08/CBJ_2026_September-October.pdf",
+      "pdf_filename": "CBJ_2026_September-October.pdf",
+      "sha256": "58CD125068B80567A90BDA7AAB3CE29700C917294C443687AA964AEBA56D653A",
+      "processed_at_utc": "2026-08-30T17:37:00.938Z",
+      "imported_gregorian_date_range": {
+          "start": "2026-09-01",
+          "end": "2026-10-31"
+      },
+      "mincha_entry_count": 62,
+      "candle_lighting_entry_count": 9,
+      "dates_skipped_no_explicit_time": []
+  });
+
   const PARASHA_MAP = {
     "Achrei Mot": "Acharei Mos",
     "Achrei Mot-Kedoshim": "Acharei Mos-Kedoshim",
