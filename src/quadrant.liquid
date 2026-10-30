@@ -1,15 +1,8 @@
-<div class="layout layout--col layout--center gap--small">
-  {% if next_zman and next_zman.size > 1 %}
-    <span class="label label--small label--gray">NEXT ZMAN</span>
-    <span class="value value--giga value--tnums" data-fit-value="true">{{ next_zman[1] }}</span>
-    <span class="title title--medium">{{ next_zman[0] }}</span>
-  {% else %}
-    <span class="label label--small label--gray">NEXT ZMAN</span>
-    <span class="title title--large">No upcoming zman</span>
-  {% endif %}
+<div class="layout layout--col gap--small">
+  <div class="flex flex--row flex--between w--full"><span class="label label--inverted">NEXT ZMAN</span><span class="label label--small">{{ display_hdate | escape }}</span></div>
+  <div class="flex flex--row gap--small">{{ next_icon }}<span class="value value--large value--tnums" data-fit-value="true">{{ next_zman[1] | default: '—' }}</span></div>
+  <span class="title">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
+  <div class="flex flex--row gap--small"><span class="label label--small">{{ parasha_english | escape }}</span><span class="label label--small" dir="rtl">{{ parasha_hebrew | escape }}</span></div>
+  {% if holiday %}<span class="label label--outline">{{ holiday.name | escape }} · {{ holiday.detail | escape }}</span>{% endif %}
 </div>
-
-<div class="title_bar">
-  <span class="title">{{ trmnl.plugin_settings.instance_name }}</span>
-  <span class="instance">Next zman</span>
-</div>
+<div class="title_bar"><span class="title">Zmanim</span><span class="instance">{{ current_time }} · Hebcal / CBJ</span></div>
