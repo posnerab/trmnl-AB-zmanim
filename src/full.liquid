@@ -34,8 +34,8 @@
   <div class="grid grid--cols-3 w--full border--top pt--2">
     {% for zman in zman_rows limit:6 %}
       <div class="item">
-        <div class="meta">{{ zman.icon }}</div>
-        <div class="content"><span class="value value--xsmall value--tnums" data-fit-value="true">{{ zman.time }}</span><span class="label label--small">{{ zman.name | escape }}</span></div>
+        <div class="meta"></div>
+        <div class="content"><div class="flex flex--row gap--small">{{ zman.icon }}<span class="value value--xsmall value--tnums" data-fit-value="true">{{ zman.time }}</span></div><span class="label label--small">{{ zman.name | escape }}</span></div>
       </div>
     {% endfor %}
   </div>
