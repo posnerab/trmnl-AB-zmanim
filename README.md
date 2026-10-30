@@ -26,3 +26,8 @@ settings and all markup, upload the transform and four layouts, update only the
 polling URL, refresh data and inspect returned fields. Then render all four sizes
 on the device model (`og_plus`). Confirm saved content matches source. A rendered
 preview confirms layout; it does not prove the physical display has refreshed.
+
+Shema (Gra) uses Hebcal `sofZmanShma` daily, matching all eight CBJ Shabbos
+Shema times in November–December 2026 to the printed minute. Shema (MGA) selects
+the latest available `sofZmanShmaMGA*` candidate, matching Next Zman notifications
+and complications. Neither Gra nor Baal Hatanya is included in the MGA maximum.
