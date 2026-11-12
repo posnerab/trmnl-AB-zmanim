@@ -39,27 +39,31 @@ overnight Sunday deadline is Latest Melave Malka. CBJ Mincha participates in
 every period, and elapsed rows disappear immediately after their inclusive
 event boundary.
 
-The live first polling URL still requests today's times only; `src/settings.yml`
-reflects that saved configuration. The transform supports a rolling date range,
-chooses the matching civil day's times, refuses stale-day data, and bridges a
-period without a next event to actual tomorrow data when available. All layouts
-label that selection Tomorrow. Missing tomorrow data never causes today's clocks
-to be reused, so the live tomorrow bridge remains pending the polling change.
+The live first polling URL uses a rolling date range; `src/settings.yml` reflects
+the saved configuration. The transform chooses the matching civil day's times,
+refuses stale-day data, and bridges a period without a next event to actual
+tomorrow data when available. All layouts label that selection Tomorrow. Missing
+tomorrow data never causes today's clocks to be reused.
 
-To activate the range, replace only the first polling URL in the TRMNL plugin
-settings UI with this value, preserving the second URL, polling headers, and body:
+The first polling URL is configured in the TRMNL plugin settings UI as follows,
+preserving the second URL, polling headers, and body:
 
 ```text
-https://www.hebcal.com/zmanim?cfg=json&sec=1&zip=53216&start=##{{ "now" | date: "%s" | minus: 86400 | date: "%Y-%m-%d" }}&end=##{{ "now" | date: "%s" | plus: 172800 | date: "%Y-%m-%d" }}
+https://www.hebcal.com/zmanim?cfg=json&sec=1&zip=53216&start={{ "now" | date: "%s" | minus: 86400 | date: "%Y-%m-%d" }}&end={{ "now" | date: "%s" | plus: 172800 | date: "%Y-%m-%d" }}
 ```
 
 This range covers Milwaukee today and tomorrow around UTC midnight and DST.
-Both the MCP settings tool and the authenticated account API reject this change
-with the UI-only host-move guard while polling headers are set, even though both
-URLs use the same Hebcal host. Do not clear headers or the body to bypass that
-guard. After saving in the UI, read back the settings, refresh data, verify actual
-tomorrow dates in the payload, and render all four layouts before considering the
-bridge deployed.
+Use plain Liquid braces: the help article's `##` prefix remains literal in this
+settings UI's Parse result and causes polling to fail. Parse must produce clean
+dated URLs, then Test request must return a JSON batch before saving.
+
+Both the MCP settings tool and the authenticated account API reject this URL
+change with the UI-only host-move guard while polling headers are set, even
+though both URLs use the same Hebcal host. Do not clear headers or the body to
+bypass that guard. After saving in the UI, read back the settings, refresh data,
+verify actual tomorrow dates in `transform_raw_input`, and render all four
+layouts. The live range was verified on November 12, 2026: the raw Hebcal batch
+contained November 11–14 and the refreshed transform was healthy.
 
 The generated CBJ block now includes published Maariv and special events.
 Regenerate from the shared calendar; do not edit those blocks manually.
