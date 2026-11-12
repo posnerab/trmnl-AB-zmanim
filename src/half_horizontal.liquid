@@ -2,7 +2,7 @@
   <div class="flex flex--row flex--between w--full"><span class="label label--inverted">ZMANIM</span><span class="label label--small">{{ display_hdate | escape }} · <span dir="rtl">{{ hdate_hebrew | escape }}</span></span></div>
   <div class="grid grid--cols-3 w--full">
     <div class="flex flex--col gap--small text--center">
-      <span class="label label--small">NEXT ZMAN</span>
+      <span class="label label--small">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span>
       <span class="value value--large value--tnums" data-fit-value="true">{{ next_zman[1] | default: '—' }}</span>
       <div class="flex flex--row gap--small">{{ next_icon }}<span class="label">{{ next_zman[0] | escape }}</span></div>
     </div>

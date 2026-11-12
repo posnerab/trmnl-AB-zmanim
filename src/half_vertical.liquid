@@ -6,7 +6,7 @@
     <span class="title" dir="rtl">{{ parasha_hebrew | escape }}</span>
     {% if special_shabbos != blank %}<span class="label label--small">{{ special_shabbos | escape }}</span>{% endif %}
   </div>
-  <div class="flex flex--row gap--small">{{ next_icon }}<span class="label">NEXT ZMAN</span></div>
+  <div class="flex flex--row gap--small">{{ next_icon }}<span class="label">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span></div>
   <span class="value value--large value--tnums" data-fit-value="true">{{ next_zman[1] | default: '—' }}</span>
   <span class="title">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
   {% if holiday %}<div class="outline p--2 w--full"><span class="title">{{ holiday.name | escape }}</span><span class="label"> · {{ holiday.detail | escape }}</span></div>{% endif %}

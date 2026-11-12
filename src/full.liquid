@@ -17,7 +17,7 @@
     <div class="col--span-2 flex flex--row gap--medium">
       {{ next_icon }}
       <div class="flex flex--col flex--left gap--small">
-        <span class="label label--small">NEXT ZMAN</span>
+        <span class="label label--small">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span>
         <span class="value value--xxlarge value--tnums" data-fit-value="true">{{ next_zman[1] | default: '—' }}</span>
         <span class="title">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
       </div>

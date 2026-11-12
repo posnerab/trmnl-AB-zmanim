@@ -1,5 +1,5 @@
 <div class="layout layout--col gap--small">
-  <div class="flex flex--row flex--between w--full"><span class="label label--inverted">NEXT ZMAN</span><span class="label label--small">{{ display_hdate | escape }}</span></div>
+  <div class="flex flex--row flex--between w--full"><span class="label label--inverted">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span><span class="label label--small">{{ display_hdate | escape }}</span></div>
   <div class="flex flex--row gap--small">{{ next_icon }}<span class="value value--large value--tnums" data-fit-value="true">{{ next_zman[1] | default: '—' }}</span></div>
   <span class="title">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
   <div class="flex flex--row gap--small"><span class="label label--small">{{ parasha_english | escape }}</span><span class="label label--small" dir="rtl">{{ parasha_hebrew | escape }}</span></div>
