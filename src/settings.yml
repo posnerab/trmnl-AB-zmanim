@@ -7,7 +7,7 @@ polling_verb: get
 framework_version: latest
 serverless_language: ''
 refresh_interval_floor: ''
-polling_url: "https://www.hebcal.com/zmanim?cfg=json&sec=1&zip=53216&start=##{{ \"now\" | date: \"%s\" | minus: 86400 | date: \"%Y-%m-%d\" }}&end=##{{ \"now\" | date: \"%s\" | plus: 172800 | date: \"%Y-%m-%d\" }}\r\nhttps://www.hebcal.com/hebcal?v=1&cfg=json&zip=53216&year=now&ny=2&d=on&s=on&c=on&M=on&lg=a&maj=on&min=on&mf=on&nx=on&ss=on&mvch=on&leyning=off"
+polling_url: "https://www.hebcal.com/zmanim?cfg=json&sec=1&zip=53216&start={{ \"now\" | date: \"%s\" | minus: 86400 | date: \"%Y-%m-%d\" }}&end={{ \"now\" | date: \"%s\" | plus: 172800 | date: \"%Y-%m-%d\" }}\r\nhttps://www.hebcal.com/hebcal?v=1&cfg=json&zip=53216&year=now&ny=2&d=on&s=on&c=on&M=on&lg=a&maj=on&min=on&mf=on&nx=on&ss=on&mvch=on&leyning=off"
 polling_headers: content-type=application/json
 polling_body: ''
 id: 140532
