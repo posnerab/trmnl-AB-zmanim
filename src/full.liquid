@@ -1,9 +1,9 @@
-<div class="layout layout--col layout--top gap--small px--5 pt--4 pb--2">
+<div class="layout layout--col layout--top gap--xsmall px--4 pt--2 pb--1">
   {% if error %}
     <span class="title title--large">Zmanim update needed</span>
     <span class="description">{{ error | escape }}</span>
   {% else %}
-  <div class="flex flex--row flex--between w--full border--bottom pb--2">
+  <div class="flex flex--row flex--between w--full border--bottom">
     <div class="flex flex--col flex--left gap--xsmall">
       <span class="label label--inverted">{{ period | upcase | escape }}</span>
       <span class="label label--large">{{ date | escape }}</span>
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="divider w--full"></div>
-  <div class="grid grid--cols-12 w--full h--[160px]">
+  <div class="grid grid--cols-12 w--full h--[148px]">
     <div class="col--span-7 flex flex--col flex--left flex--center-y gap--xsmall">
       <div class="flex flex--row gap--small">{{ next_icon }}<span class="label label--large">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span></div>
       <div class="flex flex--row flex--bottom gap--small w--full">
@@ -35,7 +35,7 @@
       {% if calendar_expired %}<span class="label">CBJ calendar needs updating</span>{% endif %}
     </div>
   </div>
-  <div class="grid grid--cols-12 w--full border--h py--2">
+  <div class="grid grid--cols-12 w--full border--h py--1">
     <div class="col--span-8 flex flex--row flex--between gap--small pr--3">
       <div class="flex flex--col flex--left gap--xsmall"><span class="label">THIS SHABBOS</span><span class="title title--large">{{ parasha_english | escape }}</span></div>
       <span class="title title--large" dir="rtl">{{ parasha_hebrew | escape }}</span>
@@ -64,4 +64,4 @@
   </div>
   {% endif %}
 </div>
-<div class="title_bar px--5"><span class="title">Zmanim · Milwaukee</span><span class="instance">Updated {{ current_time }} · Hebcal / CBJ · Tempest</span></div>
+<div class="title_bar px--4"><span class="title">Zmanim · Milwaukee</span><span class="instance">Updated {{ current_time }} · Hebcal / CBJ · Tempest</span></div>
