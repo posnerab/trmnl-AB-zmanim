@@ -9,10 +9,13 @@ from Projects; keep `src/transform.js` and the parent
 `scripts/zmanim_transform.js` identical. Do not hand-edit the generated block.
 
 Full, horizontal half, vertical half and quadrant layouts use TRMNL framework
-classes with inline SVG zman icons (no external emoji assets). The full layout
-retains the current period's zmanim; compact views emphasize the next zman,
-bilingual parasha and holiday countdown. Hebrew dates and upcoming Shabbos
-metadata roll at Milwaukee sunset.
+classes with inline SVG icons. The full screen emphasizes the next zman, with
+remaining times on the right, bilingual date/parasha, holiday countdown, and a
+bottom row for weather, AQI and lunar phase. It uses the Classic typeface on the
+device's full-screen playlist item. Compact layouts retain their zmanim focus.
+Hebrew dates and upcoming Shabbos metadata roll at Milwaukee sunset. Hebrew
+dates include the short year (`תשפ״ז`, without `ה׳`), and Hebrew parasha names
+omit `פרשת`/`פרשה`, matching NextZman.
 
 The calendar polling URL enables major/minor holidays, fasts, Rosh Chodesh and
 special Shabbosos/Mevarchim, with two Gregorian years to cover December's next
@@ -22,10 +25,52 @@ and special Shabbosos are not the next-holiday countdown target. Times remain
 Milwaukee-based and update on TRMNL refresh, not every second.
 
 Run `npm test` in the parent tooling repo. For live publication, save current
-settings and all markup, upload the transform and four layouts, update only the
-polling URL, refresh data and inspect returned fields. Then render all four sizes
-on the device model (`og_plus`). Confirm saved content matches source. A rendered
-preview confirms layout; it does not prove the physical display has refreshed.
+settings, all markup, and the device playlist. Upload changed source files with
+exact read-back, refresh data and inspect the returned fields, then render all
+four sizes on `og_plus`. Check the actual device image separately from the editor
+preview and wait for a fresh hardware check-in. A served image and hardware
+check-in establish delivery, not a photograph of the physical e-ink panel.
+
+## Combined data and single-screen playlist
+
+The visible **Zmanim** plugin (`140532`) uses **Plugin Merge**. `src/shared.liquid`
+declares its four exact dependencies so TRMNL continues to fetch their data:
+
+| Source | Instance | Data |
+| --- | --- | --- |
+| Zmanim · Hebcal Data | `540290` | Two Hebcal polling URLs, dated solar times and calendar context |
+| Milwaukee | `140203` | Existing Tempest weather, Fahrenheit, mph and inches |
+| Air Quality | `384908` | Existing local AQI recipe and its status |
+| Lunar Calendar | `141216` | Existing lunar phase and illumination |
+
+`data/settings.yml` and `data/transform.js` recreate the hidden Hebcal feed. It
+retains actual dated solar calculations and trims unused calendar fields. The
+visible plugin recomputes selection from those dates at its own refresh time.
+Native merge sources are direct objects; private sources are wrapped in
+`merge_variables`, sometimes with an additional `data` object. The canonical
+transform accepts both these envelopes and the original `IDX_0`/`IDX_1` polling
+shape, preserving the tester and other consumers.
+
+Only playlist item `887709` is visible on device `27064`; its font is `classic`.
+The former mashups are hidden. Keep source item `906606` and the native/AQI
+source entries hidden in the playlist: they supply data without rotating onto
+the display. Do not delete the source plugins. There is no account API key in
+polling URLs, headers, markup or source; Plugin Merge stays within TRMNL.
+
+Weather observations older than three hours display an update-delay message.
+Missing weather, AQI or lunar data leaves Zmanim usable. Missing current-day
+Hebcal data shows a refresh-needed state rather than yesterday's clocks. Values
+and event selection update on TRMNL's refresh/check-in schedule, not at exact
+second boundaries. This does not inherit an iPhone's per-zman display toggles;
+it follows NextZman's default selection rules.
+
+The plugin MCP refresh tool only supports polling. For this merged plugin use
+**Refresh now** in its settings UI, then verify merge variables and production
+logs. The synchronous markup writer can report a localhost transform-preview
+failure while the asynchronous production worker succeeds; require a fresh
+successful worker result, never treat the saved receipt alone as validation.
+TRMNL GitHub Sync may create commits after markup saves: fetch and reconcile
+those exact saved files before publishing leaf-to-parent source changes.
 
 ## NextZman parity
 
@@ -39,8 +84,9 @@ overnight Sunday deadline is Latest Melave Malka. CBJ Mincha participates in
 every period, and elapsed rows disappear immediately after their inclusive
 event boundary.
 
-The live first polling URL uses a rolling date range; `src/settings.yml` reflects
-the saved configuration. The transform chooses the matching civil day's times,
+The hidden Hebcal feed's first polling URL uses a rolling date range;
+`data/settings.yml` reflects that feed. The visible plugin retains its original
+polling fields while using Plugin Merge. The transform chooses the matching civil day's times,
 refuses stale-day data, and bridges a period without a next event to actual
 tomorrow data when available. All layouts label that selection Tomorrow. Missing
 tomorrow data never causes today's clocks to be reused.

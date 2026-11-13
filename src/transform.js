@@ -802,7 +802,8 @@ function buildPayload(input, options) {
     if (rest >= 10) { letters += "י"; rest -= 10; }
     if (rest) letters += "אבגדהוזחט"[rest - 1];
     const shortYear = letters.length > 1 ? letters.slice(0, -1) + "״" + letters.slice(-1) : letters + "׳";
-    return day.hebrew.replace(/\s+(?:ה[׳']?)?ת[א-ת״׳"']*$/, "") + " " + shortYear;
+    const nativeDate = day.hebrew.replace(new RegExp("\\s+(?:ה[׳']?)?" + shortYear + "$"), "");
+    return nativeDate + " " + shortYear;
   }
 
   function numeric(value) {
