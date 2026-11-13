@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="divider w--full"></div>
-  <div class="grid grid--cols-12 w--full">
+  <div class="grid grid--cols-12 w--full" style="--value-large-font-size:48px;--value-large-line-height:54px">
     <div class="col--span-5 flex flex--col flex--left gap--xsmall pr--2">
       {% if weather and weather.unavailable != true %}
       <div class="flex flex--row gap--small">{{ weather.icon }}<span class="value value--large" data-fit-value="true">{{ weather.temperature }}°F</span><span class="label label--large" data-clamp="2">{{ weather.conditions | escape }}</span></div>
