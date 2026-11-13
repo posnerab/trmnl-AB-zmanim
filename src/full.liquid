@@ -5,7 +5,7 @@
   {% else %}
   <div class="flex flex--row flex--between w--full border--bottom">
     <div class="flex flex--col flex--left gap--xsmall">
-      <span class="label label--inverted">{{ period | upcase | escape }}</span>
+      <span class="label label--large label--inverted">{{ period | upcase | escape }}</span>
       <span class="label label--large">{{ date | escape }}</span>
     </div>
     <div class="flex flex--col flex--right gap--xsmall">
@@ -24,7 +24,7 @@
       <span class="title title--large" data-clamp="2">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
     </div>
     <div class="col--span-5 flex flex--col flex--left flex--center-y gap--xsmall pl--2 border--left">
-      <span class="label label--small">{% if next_day %}TOMORROW{% else %}STILL AHEAD{% endif %}</span>
+      <span class="label">{% if next_day %}TOMORROW{% else %}STILL AHEAD{% endif %}</span>
       {% for zman in following_rows limit:5 %}
       <div class="flex flex--row flex--between w--full gap--small">
         <span class="label label--large" data-clamp="2">{{ zman.name | escape }}</span>
@@ -37,7 +37,7 @@
   </div>
   <div class="grid grid--cols-12 w--full border--h py--1">
     <div class="col--span-8 flex flex--row flex--between gap--small pr--3">
-      <div class="flex flex--col flex--left gap--xsmall"><span class="label">THIS SHABBOS</span><span class="title title--large">{{ parasha_english | escape }}</span></div>
+      <span class="title title--large">{{ parasha_english | escape }}</span>
       <span class="title title--large" dir="rtl">{{ parasha_hebrew | escape }}</span>
     </div>
     <div class="col--span-4 flex flex--col flex--right gap--xsmall">
