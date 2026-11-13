@@ -685,7 +685,7 @@ function buildPayload(input, options) {
 
     const found = [value];
     for (const key of Object.keys(value)) {
-      if (/^(IDX_\d+|idx_\d+|private_plugin_\d+|weather_\d+|lunar_calendar_\d+|data|body|response|zmanim|calendar)$/.test(key)) {
+      if (/^(IDX_\d+|idx_\d+|private_plugin_\d+|weather_\d+|lunar_calendar_\d+|merge_variables|data|body|response|zmanim|calendar)$/.test(key)) {
         found.push(...candidates(value[key], depth + 1));
       }
     }
