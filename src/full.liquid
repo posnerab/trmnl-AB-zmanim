@@ -1,4 +1,4 @@
-<div class="layout layout--col layout--top gap--small">
+<div class="layout layout--col layout--top gap--small px--5 pt--4 pb--2">
   {% if error %}
     <span class="title title--large">Zmanim update needed</span>
     <span class="description">{{ error | escape }}</span>
@@ -6,29 +6,29 @@
   <div class="flex flex--row flex--between w--full border--bottom pb--2">
     <div class="flex flex--col flex--left gap--xsmall">
       <span class="label label--inverted">{{ period | upcase | escape }}</span>
-      <span class="label">{{ date | escape }}</span>
+      <span class="label label--large">{{ date | escape }}</span>
     </div>
     <div class="flex flex--col flex--right gap--xsmall">
       <span class="title title--large" dir="rtl">{{ hdate_hebrew | escape }}</span>
-      <span class="label">{{ display_hdate | escape }}</span>
+      <span class="label label--large">{{ display_hdate | escape }}</span>
     </div>
   </div>
   <div class="divider w--full"></div>
-  <div class="grid grid--cols-12 w--full h--[148px]">
+  <div class="grid grid--cols-12 w--full h--[160px]">
     <div class="col--span-7 flex flex--col flex--left flex--center-y gap--xsmall">
       <div class="flex flex--row gap--small">{{ next_icon }}<span class="label label--large">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span></div>
       <div class="flex flex--row flex--bottom gap--small w--full">
         <span class="value value--xlarge value--tnums" data-fit-value="true">{{ next_zman[1] | remove: ' AM' | remove: ' PM' | default: '—' }}</span>
         <span class="label label--large pb--2">{{ next_zman[1] | split: ' ' | last }}</span>
       </div>
-      <span class="title" data-clamp="2">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
+      <span class="title title--large" data-clamp="2">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
     </div>
-    <div class="col--span-5 flex flex--col flex--left flex--center-y gap--small pl--4 border--left">
+    <div class="col--span-5 flex flex--col flex--left flex--center-y gap--xsmall pl--2 border--left">
       <span class="label label--small">{% if next_day %}TOMORROW{% else %}STILL AHEAD{% endif %}</span>
       {% for zman in following_rows limit:5 %}
       <div class="flex flex--row flex--between w--full gap--small">
-        <span class="label" data-clamp="2">{{ zman.name | escape }}</span>
-        <span class="value value--xsmall value--tnums no-shrink">{{ zman.time }}</span>
+        <span class="label label--large" data-clamp="2">{{ zman.name | escape }}</span>
+        <span class="value value--small value--tnums no-shrink">{{ zman.time }}</span>
       </div>
       {% else %}<span class="label">Last zman in this period</span>{% endfor %}
       {% if following_rows.size > 5 %}<span class="label label--small">+ {{ following_rows.size | minus: 5 }} later</span>{% endif %}
@@ -37,34 +37,31 @@
   </div>
   <div class="grid grid--cols-12 w--full border--h py--2">
     <div class="col--span-8 flex flex--row flex--between gap--small pr--3">
-      <div class="flex flex--col flex--left gap--xsmall"><span class="label label--small">THIS SHABBOS</span><span class="title">{{ parasha_english | escape }}</span></div>
+      <div class="flex flex--col flex--left gap--xsmall"><span class="label">THIS SHABBOS</span><span class="title title--large">{{ parasha_english | escape }}</span></div>
       <span class="title title--large" dir="rtl">{{ parasha_hebrew | escape }}</span>
     </div>
     <div class="col--span-4 flex flex--col flex--right gap--xsmall">
       {% if special_shabbos != blank %}<span class="label label--small">{{ special_shabbos | escape }}</span>{% endif %}
-      {% if holiday %}<span class="title title--small">{{ holiday.name | escape }}</span><span class="label">{{ holiday.detail | escape }}</span>{% endif %}
+      {% if holiday %}<span class="title">{{ holiday.name | escape }}</span><span class="label">{{ holiday.detail | escape }}</span>{% endif %}
     </div>
   </div>
   <div class="divider w--full"></div>
   <div class="grid grid--cols-12 w--full">
     <div class="col--span-5 flex flex--col flex--left gap--xsmall pr--2">
-      <span class="label label--small">MILWAUKEE WEATHER</span>
       {% if weather and weather.unavailable != true %}
-      <div class="flex flex--row gap--small">{{ weather.icon }}<span class="value value--base" data-fit-value="true">{{ weather.temperature }}°F</span><span class="label" data-clamp="2">{{ weather.conditions | escape }}</span></div>
-      <span class="label label--small">H {{ weather.high | default: '—' }}° · L {{ weather.low | default: '—' }}° · Precip {{ weather.precipitation | default: '—' }}%</span>
+      <div class="flex flex--row gap--small">{{ weather.icon }}<span class="value value--large" data-fit-value="true">{{ weather.temperature }}°F</span><span class="label label--large" data-clamp="2">{{ weather.conditions | escape }}</span></div>
+      <span class="label">H {{ weather.high | default: '—' }}° · L {{ weather.low | default: '—' }}° · Precip {{ weather.precipitation | default: '—' }}%</span>
       {% else %}<span class="label">{{ weather.detail | default: 'Weather unavailable' }}</span>{% endif %}
     </div>
     <div class="col--span-3 flex flex--col flex--left gap--xsmall pl--3 border--left">
-      <span class="label label--small">AIR QUALITY</span>
-      {% if air_quality %}<div class="flex flex--row flex--bottom gap--small"><span class="value value--base" data-fit-value="true">{{ air_quality.value }}</span><span class="label pb--1">AQI</span></div><span class="label">{{ air_quality.status | escape }}</span>
+      {% if air_quality %}<div class="flex flex--row flex--bottom gap--small"><span class="value value--large" data-fit-value="true">{{ air_quality.value }}</span><span class="label label--large pb--1">AQI</span></div><span class="label label--large">{{ air_quality.status | escape }}</span>
       {% else %}<span class="label">AQI unavailable</span>{% endif %}
     </div>
     <div class="col--span-4 flex flex--col flex--left gap--xsmall pl--3 border--left">
-      <span class="label label--small">LUNAR PHASE</span>
-      {% if lunar %}<div class="flex flex--row gap--small">{{ lunar.icon }}<div class="flex flex--col flex--left gap--xsmall"><span class="title title--small">{{ lunar.name | escape }}</span><span class="label label--small">{{ lunar.illumination }}% illuminated</span></div></div>
+      {% if lunar %}<div class="flex flex--row gap--small">{{ lunar.icon }}<div class="flex flex--col flex--left gap--xsmall"><span class="title">{{ lunar.name | escape }}</span><span class="label">{{ lunar.illumination }}% illuminated</span></div></div>
       {% else %}<span class="label">Moon data unavailable</span>{% endif %}
     </div>
   </div>
   {% endif %}
 </div>
-<div class="title_bar"><span class="title">Zmanim · Milwaukee</span><span class="instance">Updated {{ current_time }} · Hebcal / CBJ · Tempest</span></div>
+<div class="title_bar px--5"><span class="title">Zmanim · Milwaukee</span><span class="instance">Updated {{ current_time }} · Hebcal / CBJ · Tempest</span></div>
