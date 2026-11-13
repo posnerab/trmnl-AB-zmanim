@@ -1,5 +1,5 @@
 ---
-strategy: polling
+strategy: plugin_merge
 no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
