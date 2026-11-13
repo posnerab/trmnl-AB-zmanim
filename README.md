@@ -12,7 +12,11 @@ Full, horizontal half, vertical half and quadrant layouts use TRMNL framework
 classes with inline SVG icons. The full screen emphasizes the next zman, with
 remaining times on the right, bilingual date/parasha, holiday countdown, and a
 bottom row for weather, AQI and lunar phase. It uses the Classic typeface on the
-device's full-screen playlist item. Compact layouts retain their zmanim focus.
+device's full-screen playlist item. The full layout adds a 16px horizontal inset
+inside TRMNL's bleed margin, enlarges dates and upcoming zmanim, and omits the
+redundant weather/AQI/lunar headings. Bottom-row metric values use a 48px size
+and 54px line height so the larger details remain clear above the footer.
+Compact layouts retain their zmanim focus.
 Hebrew dates and upcoming Shabbos metadata roll at Milwaukee sunset. Hebrew
 dates include the short year (`תשפ״ז`, without `ה׳`), and Hebrew parasha names
 omit `פרשת`/`פרשה`, matching NextZman.
