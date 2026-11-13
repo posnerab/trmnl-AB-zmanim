@@ -1,4 +1,4 @@
-<div class="layout layout--col gap--small">
+<div class="layout layout--col layout--top gap--small">
   {% if error %}
     <span class="title title--large">Zmanim update needed</span>
     <span class="description">{{ error | escape }}</span>
@@ -13,11 +13,11 @@
       <span class="label">{{ display_hdate | escape }}</span>
     </div>
   </div>
-  <div class="grid grid--cols-12 w--full grow">
+  <div class="grid grid--cols-12 w--full h--[160px]">
     <div class="col--span-7 flex flex--col flex--left flex--center-y gap--small">
       <div class="flex flex--row gap--small">{{ next_icon }}<span class="label label--large">NEXT ZMAN{% if next_day %} · TOMORROW{% endif %}</span></div>
       <div class="flex flex--row flex--bottom gap--small w--full">
-        <span class="value value--xxxlarge value--tnums" data-fit-value="true">{{ next_zman[1] | remove: ' AM' | remove: ' PM' | default: '—' }}</span>
+        <span class="value value--xxlarge value--tnums" data-fit-value="true">{{ next_zman[1] | remove: ' AM' | remove: ' PM' | default: '—' }}</span>
         <span class="label label--large pb--2">{{ next_zman[1] | split: ' ' | last }}</span>
       </div>
       <span class="title title--large" data-clamp="2">{{ next_zman[0] | default: 'No upcoming zman' | escape }}</span>
@@ -48,7 +48,7 @@
       <span class="label label--small">MILWAUKEE WEATHER</span>
       {% if weather and weather.unavailable != true %}
       <div class="flex flex--row gap--small">{{ weather.icon }}<span class="value value--large" data-fit-value="true">{{ weather.temperature }}°F</span><span class="label" data-clamp="2">{{ weather.conditions | escape }}</span></div>
-      <span class="label label--small">H {{ weather.high | default: '—' }}° · L {{ weather.low | default: '—' }}° · Rain {{ weather.precipitation | default: '—' }}%</span>
+      <span class="label label--small">H {{ weather.high | default: '—' }}° · L {{ weather.low | default: '—' }}° · Precip {{ weather.precipitation | default: '—' }}%</span>
       {% else %}<span class="label">{{ weather.detail | default: 'Weather unavailable' }}</span>{% endif %}
     </div>
     <div class="col--span-3 flex flex--col flex--left gap--xsmall pl--3 border--left">
