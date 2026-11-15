@@ -55,7 +55,13 @@ Native merge sources are direct objects; private sources are wrapped in
 transform accepts both these envelopes and the original `IDX_0`/`IDX_1` polling
 shape, preserving the tester and other consumers.
 
-Only playlist item `887709` is visible on device `27064`; its font is `classic`.
+The active display uses Redirect plugin `541366`, playlist item `908391`, on
+device `27064`. Original item `887709` is hidden and retained for rollback.
+The Pi boundary renderer uses this full layout and the Classic font; it supplies
+an optional `mamish` object only at :00–:15 and :30–:45 each hour. That object
+replaces only the lunar tile with the Weather Mamish gauge, dressing score and
+feels-like temperature. Without it (including the cloud plugin) lunar remains.
+See the parent `boundary-service/README.md` for scoring, freshness and deployment.
 The former mashups are hidden. Keep source item `906606` and the native/AQI
 source entries hidden in the playlist: they supply data without rotating onto
 the display. Do not delete the source plugins. There is no account API key in

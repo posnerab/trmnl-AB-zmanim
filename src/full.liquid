@@ -58,7 +58,10 @@
       {% else %}<span class="label">AQI unavailable</span>{% endif %}
     </div>
     <div class="col--span-4 flex flex--col flex--left gap--xsmall pl--3 border--left">
-      {% if lunar %}<div class="flex flex--row gap--small">{{ lunar.icon }}<div class="flex flex--col flex--left gap--xsmall"><span class="title">{{ lunar.name | escape }}</span><span class="label">{{ lunar.illumination }}% illuminated</span></div></div>
+      {% if mamish %}
+      <div class="flex flex--row gap--small">{{ mamish.gauge }}<div class="flex flex--col flex--left" style="gap:0"><span class="label label--small">WEATHER MAMISH</span><div class="flex flex--row flex--bottom gap--xsmall"><span class="value" style="font-size:40px;line-height:40px">{{ mamish.score }}</span><span class="label pb--1">/100</span></div></div></div>
+      <span class="label">{{ mamish.label | escape }} · {{ mamish.feels_like }}° feels</span>
+      {% elsif lunar %}<div class="flex flex--row gap--small">{{ lunar.icon }}<div class="flex flex--col flex--left gap--xsmall"><span class="title">{{ lunar.name | escape }}</span><span class="label">{{ lunar.illumination }}% illuminated</span></div></div>
       {% else %}<span class="label">Moon data unavailable</span>{% endif %}
     </div>
   </div>
