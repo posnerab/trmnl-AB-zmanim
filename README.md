@@ -120,3 +120,12 @@ Regenerate from the shared calendar; do not edit those blocks manually.
 
 References: [TRMNL dynamic polling URLs](https://help.trmnl.com/en/articles/12689499-dynamic-polling-urls)
 and [Hebcal batch zmanim](https://www.hebcal.com/home/1663/zmanim-halachic-times-api).
+
+## Boundary renderer
+
+The parent tooling repo's `boundary-service/` can render this full layout on the
+Pi and deliver it through TRMNL Redirect. The transform's optional
+`transitionMetadata` option adds `next_transition_at` for that renderer without
+changing normal hosted output. Source and mirror must remain identical. Keep
+the existing merged plugin and data dependencies for source refresh and rollback;
+follow the parent service's activation gates before changing the device playlist.
